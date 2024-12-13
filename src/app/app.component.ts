@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, inject} from '@angular/core';
 import {PlayerComponent} from './components/player/player.component';
+import {AudioControlService} from './services/audio-control.service';
 
 export type Sound = { id: string, title: string, icon: string, file: { url: string, type: string } };
 export type Sounds = Sound[];
@@ -11,7 +12,7 @@ export type Sounds = Sound[];
   imports: [
     PlayerComponent
   ],
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
 
@@ -225,4 +226,9 @@ export class AppComponent {
     }
   ]
 
+  private audioService = inject(AudioControlService);
+
+  togglePlay(): void {
+    this.audioService.togglePlay();
+  }
 }
