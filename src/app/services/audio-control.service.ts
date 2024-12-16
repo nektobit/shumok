@@ -19,8 +19,6 @@ export class AudioControlService {
       }
       return players; // Возвращаем обновлённый массив
     });
-    //console.log('Players after registration:', this.players());
-    console.log('Players after registration:', this.players(), this.players().length);
   }
 
   togglePlay(): void {

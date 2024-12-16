@@ -2,7 +2,7 @@
   <button type="button" (click)="togglePlay()">Звук</button>
 </div>
 <div>
-  @for(sound of sounds; track sound.id) {
+  @for(sound of SOUNDS; track sound.id) {
     <app-player [sound]="sound"></app-player>
   }
 </div>
