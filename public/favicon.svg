@@ -1,0 +1,14 @@
+<svg width="740.000000" height="1023.000000" viewBox="0 0 740 1023" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs/>
+	<rect id="Rectangle 1" x="1.000000" rx="81.500000" width="163.000000" height="872.000000" fill="#5FCEB7" fill-opacity="1.000000"/>
+	<ellipse id="Oval 1" cx="225.500000" cy="798.000000" rx="225.500000" ry="225.000000" fill="#494444" fill-opacity="1.000000"/>
+	<ellipse id="Oval 3" cx="514.500000" cy="797.696411" rx="225.500000" ry="225.303558" fill="#494444" fill-opacity="1.000000"/>
+	<rect id="Rectangle 2" x="289.000000" rx="81.500000" width="163.000000" height="697.000000" fill="#5FCEB7" fill-opacity="1.000000"/>
+	<rect id="Rectangle 5" x="576.665039" rx="81.667572" width="163.335144" height="871.985657" fill="#5FCEB7" fill-opacity="1.000000"/>
+	<path id="Union" d="M289 379L164 379L164 798L164.002 798C164 798.167 164 798.333 164 798.5C164 833.018 191.982 861 226.5 861C261.018 861 289 833.018 289 798.5C289 798.333 289 798.167 288.998 798L289 798L289 379Z" clip-rule="evenodd" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+	<path id="Union" d="M577 379L452 379L452 798L452.002 798C452 798.167 452 798.333 452 798.5C452 833.018 479.982 861 514.5 861C549.018 861 577 833.018 577 798.5C577 798.333 577 798.167 576.998 798L577 798L577 379Z" clip-rule="evenodd" fill="#FFFFFF" fill-opacity="1.000000" fill-rule="evenodd"/>
+	<ellipse id="Oval 5" rx="19.116821" ry="34.952393" transform="matrix(0.807454 0.589931 -0.589931 0.807454 49.0542 52.4998)" fill="#FFFFFF" fill-opacity="0.643678"/>
+</svg>
