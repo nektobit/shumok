@@ -6,7 +6,7 @@ export const SOUNDS: Sounds = [
     title: 'Дождь',
     icon: 'Rain',
     file: {
-      url: 'sounds/rain.ogv',
+      url: 'https://cdn.freesound.org/previews/37/37614_52655-lq.mp3',
       type: 'audio/ogv'
     }
   },
