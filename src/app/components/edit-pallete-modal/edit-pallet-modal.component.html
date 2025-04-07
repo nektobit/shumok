@@ -1,0 +1,5 @@
+<dialog #dialogElement [open]="isDialogOpen">
+  <button autofocus (click)="isDialogOpen = false">Close</button>
+  <textarea [ngModel]="JSON.stringify(soundsJSON())" (ngModelChange)="soundsJSON.set(JSON.parse($event));"></textarea>
+</dialog>
+<button type="button" (click)="isDialogOpen = true">Редактировать палитру звуков</button>
