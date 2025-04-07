@@ -3,7 +3,7 @@
     <button type="button" (click)="togglePlay()">Звук</button>
   </div>
   <div>
-    @for(sound of SOUNDS; track sound.id) {
+    @for(sound of SOUNDS(); track sound.id) {
       <app-player [sound]="sound"></app-player>
     }
   </div>
@@ -23,8 +23,7 @@
 } @else {
   <button type="button" id="play" (click)="audioService.initializeAudioContext()">play</button>
 }
-
-{{ soundsIDS  | json }}
+<app-edit-pallet-modal></app-edit-pallet-modal>
 
 
 

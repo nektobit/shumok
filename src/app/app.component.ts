@@ -1,11 +1,12 @@
-import {AfterViewInit, Component, ElementRef, inject, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {PlayerComponent} from './components/player/player.component';
 import {AudioControlService} from './services/audio-control.service';
 import {SOUNDS} from './store/sounds.const';
-import {AsyncPipe, JsonPipe, NgIf} from '@angular/common';
+import {JsonPipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {FreeSoundService} from './services/freesound.service';
+import {EditPalletModalComponent} from './components/edit-pallete-modal/edit-pallet-modal.component';
+import {PalletService} from './services/pallet.service';
 
 export type Sound = { id: string, title: string, icon: string, file: { url: string, type: string } };
 export type Sounds = Sound[];
@@ -17,15 +18,13 @@ export type Sounds = Sound[];
   imports: [
     PlayerComponent,
     JsonPipe,
+    EditPalletModalComponent,
   ],
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   public audioService = inject(AudioControlService);
   private activatedRoute = inject(ActivatedRoute);
-  private frService = inject(FreeSoundService);
-
-  public soundsIDS: string[] = [];
   private routeSubscription!: Subscription;
 
   togglePlay(): void {
@@ -33,11 +32,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.queryParams.subscribe((queryParams: { [key: string]: string | undefined }) => {
-      this.soundsIDS = queryParams['s'] ? queryParams['s'].split(';') : [];
-    });
 
-    this.frService.getFreeSoundUrls(this.soundsIDS);
   }
 
   onVolumeChange(event: Event): void {
@@ -56,5 +51,5 @@ export class AppComponent implements OnInit {
     }
   }
 
-  protected readonly SOUNDS = SOUNDS;
+  protected readonly SOUNDS = inject(PalletService).soundSignal;
 }
