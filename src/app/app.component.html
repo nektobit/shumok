@@ -1,13 +1,24 @@
-@if (audioService.isInitialized()) {
-  <div>
-    <button type="button" (click)="togglePlay()">Звук</button>
-  </div>
-  <div>
-    @for(sound of SOUNDS(); track sound.id) {
-      <app-player [sound]="sound"></app-player>
-    }
+<div class="layout">
+  <h1>Шумок</h1>
+  <app-play-btn [isPlaying]="audioService.isAnyPlaying()" (click)="togglePlay()"></app-play-btn>
+
+  <div style="margin-top: 2rem">
+    <app-edit-pallet-modal></app-edit-pallet-modal>
   </div>
 
+  <div class="sounds-wrapper">
+
+
+
+    <div>
+      @for(sound of SOUNDS(); track sound.id) {
+        <app-player [sound]="sound"></app-player>
+      }
+    </div>
+
+
+
+  </div>
   <div>
     <!-- Регулятор громкости -->
     <label for="volumeControl">Общая громкость:</label>
@@ -20,10 +31,9 @@
       (input)="onVolumeChange($event)"
     />
   </div>
-} @else {
-  <button type="button" id="play" (click)="audioService.initializeAudioContext()">play</button>
-}
-<app-edit-pallet-modal></app-edit-pallet-modal>
+</div>
+
+
 
 
 

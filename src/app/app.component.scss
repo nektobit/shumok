@@ -1,4 +1,10 @@
-div {
+.sounds-wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
+.layout {
+  max-width: 20rem;
+  margin: 0 auto;
+  background: #292d30;
+}
+
