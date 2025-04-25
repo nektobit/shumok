@@ -26,6 +26,27 @@
       <button type="submit">Сохранить</button>
       <button type="button" (click)="close()">Закрыть</button>
     </div>
+
+
+    <div class="import-export">
+      <button type="button" (click)="exportSounds()">
+        Сохранить список звуков как файл
+      </button>
+      <input #importLink
+             type="text"
+             placeholder="https://…/sounds.json" />
+      <button type="button"
+              (click)="importFromUrl(importLink.value)">
+        Загрузить список звуков по ссылке
+      </button>
+    </div>
+
+    <div class="actions">
+      <button type="button" (click)="addSound()">Добавить звук</button>
+      <button type="submit">Сохранить</button>
+      <button type="button" (click)="close()">Закрыть</button>
+    </div>
+
   </form>
 </dialog>
 
