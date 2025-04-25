@@ -21,7 +21,11 @@ $size: 24px;
 
   width: $size;
   height: $size;
+
+  transition: margin-left 200ms ease-in-out;
+  will-change: margin-left;
   margin-left: 0.7rem;
+
   &::after,
   &::before {
     content: "";
