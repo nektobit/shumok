@@ -1,0 +1,75 @@
+
+$size: 24px;
+
+.btn {
+  background: #43474a;
+  width: 4rem;
+  height: 4rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    background: #575a5d;
+  }
+}
+
+.icon-playing {
+  cursor: pointer;
+  position: relative;
+  appearance: none;
+
+  width: $size;
+  height: $size;
+  margin-left: 0.7rem;
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    background: #dccdc4;
+    width: 33%;
+    height: 100%;
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    transition: width 200ms ease-in-out,
+    clip-path 200ms ease-in-out;
+    will-change: width, clip-path;
+  }
+
+  &::before {
+    left: 0;
+    width: 40%;
+    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0% 100%);
+  }
+
+  &::after {
+    // add a pixel to fix a webkit gap bug
+    right: 1px;
+    width: 60%;
+    // calc to account for the gap bug fix
+    clip-path:  polygon(0 calc(20% - 0.5px), 100% 50%, 100% 50%, 0 calc(80% + 0.5px));
+  }
+
+  &:checked {
+    margin-left: 0.3rem;
+    &::before,
+    &::after {
+      width: 33%;
+      clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+    }
+  }
+}
+
+// =========
+// unrelated
+// =========
+@keyframes something {
+  0%, 50% {
+    background: #1a1a1a;
+  }
+  25% {
+    background: #222;
+  }
+  75% {
+    background: #111;
+  }
+}
