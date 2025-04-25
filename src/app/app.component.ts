@@ -8,7 +8,7 @@ import {Subscription} from 'rxjs';
 import {EditPalletModalComponent} from './components/edit-pallete-modal/edit-pallet-modal.component';
 import {PalletService} from './services/pallet.service';
 
-export type Sound = { id: string, title: string, icon: string, file: { url: string, type: string } };
+export type Sound = { category: string, id: string, title: string, icon: string, fileUrl: string };
 export type Sounds = Sound[];
 
 @Component({

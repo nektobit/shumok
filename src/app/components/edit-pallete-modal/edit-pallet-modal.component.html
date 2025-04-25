@@ -1,5 +1,32 @@
-<dialog #dialogElement [open]="isDialogOpen">
-  <button autofocus (click)="isDialogOpen = false">Close</button>
-  <textarea [ngModel]="JSON.stringify(soundsJSON())" (ngModelChange)="soundsJSON.set(JSON.parse($event));"></textarea>
+<dialog [open]="isDialogOpen">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <div formArrayName="sounds">
+      <div *ngFor="let ctrl of soundsArray.controls; let i = index" [formGroupName]="i" class="sound-item">
+        <label>
+          Название:
+          <input formControlName="title" placeholder="Название звука" />
+        </label>
+        <label>
+          URL:
+          <input formControlName="fileUrl" placeholder="https://..." />
+        </label>
+        <label>
+          Категория:
+          <select formControlName="category">
+            <option value="focus">Фокус</option>
+            <option value="calm">Спокойствие</option>
+          </select>
+        </label>
+        <button type="button" (click)="removeSound(i)">Удалить</button>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" (click)="addSound()">Добавить звук</button>
+      <button type="submit">Сохранить</button>
+      <button type="button" (click)="close()">Закрыть</button>
+    </div>
+  </form>
 </dialog>
-<button type="button" (click)="isDialogOpen = true">Редактировать палитру звуков</button>
+
+<button type="button" (click)="open()">Редактировать палитру звуков</button>
