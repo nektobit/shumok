@@ -1,99 +1,60 @@
-import { Injectable, signal, effect } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AudioControlService {
-  // Сигнал со списком всех зарегистрированных плееров
-  private players = signal<HTMLAudioElement[]>([]);
+  // Список всех зарегистрированных <audio>
+  private players           = signal<HTMLAudioElement[]>([]);
+  // Те, что были активны при последней паузе
+  private previouslyPlaying = signal<Set<HTMLAudioElement>>(new Set());
+  // Флаг: играет ли хоть один плеер
+  public  isAnyPlaying      = signal<boolean>(false);
 
-  // Сигнал с набором плееров, которые играли ранее
-  private previouslyPlayingPlayers = signal<Set<HTMLAudioElement>>(new Set());
+  constructor() {}
 
-  // Сигнал для управления громкостью
-  private volume = signal<number>(1);
-
-  private audioContext: AudioContext | null = null;
-  private gainNode: GainNode | null = null;
-
-  constructor() {
-    // Подписываемся на изменение громкости, если gainNode уже инициализирован
-    effect(() => {
-      const currentVolume = this.volume();
-      const initialized = this.isInitialized();
-      if (this.gainNode && initialized) {
-        this.gainNode.gain.value = currentVolume;
-      }
-    });
-
-    // Ставим обработчик на кнопку "play" (она должна существовать в DOM)
-    // const playButton = document.getElementById('play');
-    // if (playButton) {
-    //
-    //   playButton.addEventListener('click', () => {
-    //
-    //     this.initializeAudioContext();
-    //   });
-    // } else {
-    //   console.warn('No #play button found in the DOM.');
-    // }
-  }
-
-  public isInitialized = signal<boolean>(false);
-
-  public initializeAudioContext(): void {
-    if (!this.audioContext) {
-        this.audioContext = new AudioContext();
-
-        this.gainNode = this.audioContext.createGain();
-        this.gainNode.gain.value = this.volume();
-
-        this.gainNode.connect(this.audioContext.destination);
-
-        this.isInitialized.set(true);
-    }
-  }
-
+  /** Регистрирует новый <audio> в сервисе */
   registerPlayer(player: HTMLAudioElement): void {
-    if (!this.audioContext || !this.gainNode) {
-      console.warn('AudioContext is not initialized yet. Ensure user clicked the play button.');
-      return;
-    }
+    this.players.update(list => {
+      if (!list.includes(player)) {
+        list.push(player);
 
-    this.players.update((players) => {
-      if (!players.includes(player)) {
-        const track = this.audioContext!.createMediaElementSource(player);
-        track.connect(this.gainNode!);
-        players.push(player);
+        // Следим за ручным play/pause, чтобы держать isAnyPlaying в актуальном состоянии
+        player.addEventListener('play',  () => this.updateAnyPlaying());
+        player.addEventListener('pause', () => this.updateAnyPlaying());
       }
-      return players;
+      return list;
     });
+    // сразу обновляем флаг
+    this.updateAnyPlaying();
   }
 
+  /** Toggle-play: логика пауза ↔ резюме ↔ первый запуск */
   togglePlay(): void {
-    const registeredPlayers = this.players();
-    console.log('Registered players on toggle:', registeredPlayers);
+    const list    = this.players();
+    const playing = list.filter(p => !p.paused);
+    const saved   = this.previouslyPlaying();
 
-    const currentlyPlaying = registeredPlayers.filter((p) => !p.paused);
-    const prevPlaying = this.previouslyPlayingPlayers();
+    if (playing.length > 0) {
+      // если что-то играет — запоминаем и ставим на паузу только их
+      this.previouslyPlaying.set(new Set(playing));
+      playing.forEach(p => p.pause());
 
-    if (prevPlaying.size === 0) {
-      if (currentlyPlaying.length > 0) {
-        this.previouslyPlayingPlayers.set(new Set(currentlyPlaying));
-        currentlyPlaying.forEach((player) => player.pause());
-      }
+    } else if (saved.size > 0) {
+      // если ничего не играет, но есть сохранённый набор — возобновляем именно его
+      saved.forEach(p => p.play());
+      this.previouslyPlaying.set(new Set());
+
     } else {
-      prevPlaying.forEach((player) => player.play());
-      this.previouslyPlayingPlayers.set(new Set());
+      // первый запуск — запускаем все зарегистрированные
+      list.forEach(p => p.play());
     }
+
+    this.updateAnyPlaying();
   }
 
-  setVolume(value: number): void {
-    const clampedValue = Math.min(1, Math.max(0, value));
-    this.volume.set(clampedValue);
-  }
-
-  getVolume(): number {
-    return this.volume();
+  /** Пересчитывает флаг isAnyPlaying */
+  private updateAnyPlaying(): void {
+    this.isAnyPlaying.set(this.players().some(p => !p.paused));
   }
 }

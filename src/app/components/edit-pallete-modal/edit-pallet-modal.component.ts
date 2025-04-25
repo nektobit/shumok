@@ -35,9 +35,9 @@ export class EditPalletModalComponent implements OnInit {
     const current = this.palletService.soundSignal();
     current.forEach(sound => {
       this.soundsArray.push(this.fb.group({
-        id:       [sound.id, Validators.required],
-        title:    [sound.title, Validators.required],
-        fileUrl:  [sound.fileUrl, [Validators.required, Validators.pattern(/^https?:\/\//)]],
+        id:       [sound.id],
+        title:    [sound.title],
+        fileUrl:  [sound.fileUrl],
         category: [sound.category]
       }));
     });
@@ -49,9 +49,9 @@ export class EditPalletModalComponent implements OnInit {
 
   addSound(): void {
     this.soundsArray.push(this.fb.group({
-      id:       ['', Validators.required],
-      title:    ['', Validators.required],
-      fileUrl:  ['', [Validators.required, Validators.pattern(/^https?:\/\//)]],
+      id:       [''],
+      title:    [''],
+      fileUrl:  [''],
       category: ['']
     }));
   }
