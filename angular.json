@@ -23,6 +23,7 @@
             "polyfills": [
               "zone.js"
             ],
+            "deployUrl": "/shumok/",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
