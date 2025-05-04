@@ -31,16 +31,23 @@ jobs:
 
       - name: Build project
         run: |
-          npm run build -- --configuration production --base-href '/${{ github.event.repository.name }}/'
+          npm run build -- --configuration production --base-href '/shumok/'
         env:
           CI: false
+
+      - name: Prevent Jekyll processing
+        run: |
+          touch dist/shumok/.nojekyll
+
+      - name: Generate 404 fallback
+        run: |
+          cp dist/shumok/index.html dist/shumok/404.html
 
       - name: Upload Pages artifact
         id: pages
         uses: actions/upload-pages-artifact@v3
         with:
-          # Замените <project-name> на фактическое имя папки сборки (обычно это имя вашего Angular-проекта)
-          path: dist/${{ github.event.repository.name }}/
+          path: dist/shumok/
 
   deploy:
     needs: build
