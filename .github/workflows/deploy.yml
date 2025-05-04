@@ -30,7 +30,8 @@ jobs:
         run: npm ci
 
       - name: Build project
-        run: npm run build -- --configuration production --base-href '/${{ github.event.repository.name }}/'
+        run: |
+          npm run build -- --configuration production --base-href '/${{ github.event.repository.name }}/'
         env:
           CI: false
 
@@ -38,7 +39,8 @@ jobs:
         id: pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/<your-project-name>/
+          # Замените <project-name> на фактическое имя папки сборки (обычно это имя вашего Angular-проекта)
+          path: dist/${{ github.event.repository.name }}/
 
   deploy:
     needs: build
