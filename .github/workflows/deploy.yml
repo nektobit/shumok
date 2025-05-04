@@ -31,23 +31,23 @@ jobs:
 
       - name: Build project
         run: |
-          npm run build -- --configuration production --base-href '/shumok/'
+          npm run build -- --configuration production --base-href '/${{ github.event.repository.name }}/'
         env:
           CI: false
 
       - name: Prevent Jekyll processing
         run: |
-          touch dist/shumok/.nojekyll
+          touch dist/${{ github.event.repository.name }}/.nojekyll
 
       - name: Generate 404 fallback
         run: |
-          cp dist/shumok/index.html dist/shumok/404.html
+          cp dist/${{ github.event.repository.name }}/index.html dist/${{ github.event.repository.name }}/404.html
 
       - name: Upload Pages artifact
         id: pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/shumok/
+          path: dist/${{ github.event.repository.name }}/
 
   deploy:
     needs: build
