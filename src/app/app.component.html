@@ -7,29 +7,11 @@
   </div>
 
   <div class="sounds-wrapper">
-
-
-
     <div>
       @for(sound of SOUNDS(); track sound.id) {
         <app-player [sound]="sound"></app-player>
       }
     </div>
-
-
-
-  </div>
-  <div>
-    <!-- Регулятор громкости -->
-    <label for="volumeControl">Общая громкость:</label>
-    <input
-      id="volumeControl"
-      type="range"
-      min="0"
-      max="1"
-      step="0.01"
-      (input)="onVolumeChange($event)"
-    />
   </div>
 </div>
 

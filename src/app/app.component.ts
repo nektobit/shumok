@@ -2,7 +2,6 @@ import {Component, inject, OnInit} from '@angular/core';
 import {PlayerComponent} from './components/player/player.component';
 import {AudioControlService} from './services/audio-control.service';
 import {JsonPipe} from '@angular/common';
-import {ActivatedRoute} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {EditPalletModalComponent} from './components/edit-pallete-modal/edit-pallet-modal.component';
 import {PalletService} from './services/pallet.service';
@@ -17,7 +16,6 @@ export type Sounds = Sound[];
   standalone: true,
   imports: [
     PlayerComponent,
-    JsonPipe,
     EditPalletModalComponent,
     PlayBtnComponent,
   ],
@@ -33,16 +31,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-  }
-
-  onVolumeChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    const volume = parseFloat(input.value);
-    if (!isNaN(volume)) {
-      // this.audioService.setVolume(volume);
-    } else {
-      console.error('Invalid volume value:', input.value);
-    }
   }
 
   ngOnDestroy(): void {
