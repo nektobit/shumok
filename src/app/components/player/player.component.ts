@@ -44,6 +44,27 @@ export class PlayerComponent {
     }
   }
 
+  onCardClick(event: MouseEvent): void {
+    event.stopPropagation();
+    this.togglePlay();
+  }
+
+  onToggleClick(event: MouseEvent): void {
+    event.stopPropagation();
+    this.togglePlay();
+  }
+
+  onCardKeydown(event: KeyboardEvent): void {
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this.togglePlay();
+    }
+  }
+
   togglePlay(): void {
     if (!this.audioRef || !this.audioRef.nativeElement) {
       return;
@@ -54,6 +75,10 @@ export class PlayerComponent {
     } else {
       audio.pause();
     }
+  }
+
+  onVolumeClick(event: MouseEvent): void {
+    event.stopPropagation();
   }
 
   onVolumeChange(event: Event): void {
