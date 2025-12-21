@@ -25,7 +25,7 @@ export const SOUNDS: Sounds = [
   {
     id: 'wind',
     title: 'Ветер',
-    icon: '💨',
+    icon: '🌬️',
     fileUrl: 'sounds/wind.ogv',
     category: ''
   },
@@ -39,7 +39,7 @@ export const SOUNDS: Sounds = [
   {
     id: 'underwater',
     title: 'Под водой',
-    icon: '🐠',
+    icon: '🐟',
     fileUrl: 'sounds/underwater.ogv',
     category: ''
   },
@@ -53,7 +53,7 @@ export const SOUNDS: Sounds = [
   {
     id: 'waterfall',
     title: 'Водопад',
-    icon: '🏞️',
+    icon: '🏔️',
     fileUrl: 'sounds/waterfall.ogv',
     category: ''
   },
@@ -81,7 +81,7 @@ export const SOUNDS: Sounds = [
   {
     id: 'cave',
     title: 'Пещера',
-    icon: '🦇',
+    icon: '🕳️',
     fileUrl: 'sounds/cave-drops.ogv',
     category: ''
   },

@@ -3,7 +3,6 @@ import {PlayerComponent} from './components/player/player.component';
 import {AudioControlService} from './services/audio-control.service';
 import {JsonPipe} from '@angular/common';
 import {Subscription} from 'rxjs';
-import {EditPalletModalComponent} from './components/edit-pallete-modal/edit-pallet-modal.component';
 import {PalletService} from './services/pallet.service';
 import {PlayBtnComponent} from './components/play-btn/play-btn.component';
 
@@ -16,7 +15,6 @@ export type Sounds = Sound[];
   standalone: true,
   imports: [
     PlayerComponent,
-    EditPalletModalComponent,
     PlayBtnComponent,
   ],
   styleUrls: ['./app.component.scss'],

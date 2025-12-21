@@ -14,14 +14,56 @@ export class PlayerComponent {
 
   @ViewChild('audio', { static: false }) audioRef!: ElementRef<HTMLAudioElement>;
 
-  constructor() {}
+  isPlaying = false;
+  volume = 0.6;
+
+  private handlePlay = () => {
+    this.isPlaying = true;
+  };
+
+  private handlePause = () => {
+    this.isPlaying = false;
+  };
 
   ngAfterViewInit(): void {
     if (this.audioRef && this.audioRef.nativeElement) {
-      this.audioService.registerPlayer(this.audioRef.nativeElement);
-      //console.log(this.audioRef.nativeElement)
+      const audio = this.audioRef.nativeElement;
+      this.audioService.registerPlayer(audio);
+      audio.volume = this.volume;
+      audio.addEventListener('play', this.handlePlay);
+      audio.addEventListener('pause', this.handlePause);
     }
 
+  }
+
+  ngOnDestroy(): void {
+    if (this.audioRef && this.audioRef.nativeElement) {
+      const audio = this.audioRef.nativeElement;
+      audio.removeEventListener('play', this.handlePlay);
+      audio.removeEventListener('pause', this.handlePause);
+    }
+  }
+
+  togglePlay(): void {
+    if (!this.audioRef || !this.audioRef.nativeElement) {
+      return;
+    }
+    const audio = this.audioRef.nativeElement;
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
+    }
+  }
+
+  onVolumeChange(event: Event): void {
+    if (!this.audioRef || !this.audioRef.nativeElement) {
+      return;
+    }
+    const input = event.target as HTMLInputElement;
+    const value = Number(input.value);
+    this.volume = value;
+    this.audioRef.nativeElement.volume = value;
   }
 
   private audioService = inject(AudioControlService);

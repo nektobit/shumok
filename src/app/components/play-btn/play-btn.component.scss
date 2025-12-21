@@ -1,79 +1,70 @@
 
-$size: 24px;
+$size: 34px;
 
 .btn {
-  background: #43474a;
-  width: 4rem;
-  height: 4rem;
+  background: radial-gradient(circle at 40% 30%, rgba(255, 227, 185, 0.35), transparent 50%),
+    linear-gradient(160deg, rgba(41, 44, 56, 0.95), rgba(18, 20, 26, 0.95));
+  width: 6.5rem;
+  height: 6.5rem;
   display: grid;
   place-items: center;
   border-radius: 50%;
   cursor: pointer;
-  &:hover {
-    background: #575a5d;
-  }
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 18px 40px rgba(6, 8, 14, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+  box-shadow:
+    0 22px 46px rgba(6, 8, 14, 0.65),
+    inset 0 0 0 1px rgba(121, 208, 255, 0.3);
 }
 
 .icon-playing {
   cursor: pointer;
   position: relative;
   appearance: none;
-
   width: $size;
   height: $size;
-
   transition: margin-left 200ms ease-in-out;
   will-change: margin-left;
-  margin-left: 0.7rem;
-
-  &::after,
-  &::before {
-    content: "";
-    position: absolute;
-    background: #dccdc4;
-    width: 33%;
-    height: 100%;
-    clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
-    transition: width 200ms ease-in-out,
-    clip-path 200ms ease-in-out;
-    will-change: width, clip-path;
-  }
-
-  &::before {
-    left: 0;
-    width: 40%;
-    clip-path: polygon(0 0, 100% 20%, 100% 80%, 0% 100%);
-  }
-
-  &::after {
-    // add a pixel to fix a webkit gap bug
-    right: 1px;
-    width: 60%;
-    // calc to account for the gap bug fix
-    clip-path:  polygon(0 calc(20% - 0.5px), 100% 50%, 100% 50%, 0 calc(80% + 0.5px));
-  }
-
-  &:checked {
-    margin-left: 0.3rem;
-    &::before,
-    &::after {
-      width: 33%;
-      clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
-    }
-  }
+  margin-left: 0.6rem;
 }
 
-// =========
-// unrelated
-// =========
-@keyframes something {
-  0%, 50% {
-    background: #1a1a1a;
-  }
-  25% {
-    background: #222;
-  }
-  75% {
-    background: #111;
-  }
+.icon-playing::after,
+.icon-playing::before {
+  content: "";
+  position: absolute;
+  background: #f1dcc9;
+  width: 33%;
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
+  transition: width 200ms ease-in-out, clip-path 200ms ease-in-out;
+  will-change: width, clip-path;
+}
+
+.icon-playing::before {
+  left: 0;
+  width: 40%;
+  clip-path: polygon(0 0, 100% 20%, 100% 80%, 0% 100%);
+}
+
+.icon-playing::after {
+  right: 1px;
+  width: 60%;
+  clip-path: polygon(0 calc(20% - 0.5px), 100% 50%, 100% 50%, 0 calc(80% + 0.5px));
+}
+
+.icon-playing:checked {
+  margin-left: 0.2rem;
+}
+
+.icon-playing:checked::before,
+.icon-playing:checked::after {
+  width: 33%;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 0% 100%);
 }

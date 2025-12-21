@@ -1,12 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-html {
-  background: #292d30;
-  color: #fff;
+:root {
+  color-scheme: dark;
+  --bg-deep: #121318;
+  --bg-mid: #1c1e26;
+  --bg-soft: #252935;
+  --text-main: #efe3d6;
+  --text-muted: #b9aa9c;
+  --accent: #79d0ff;
+  --accent-warm: #f7c48c;
 }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--text-main);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(121, 208, 255, 0.15), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(247, 196, 140, 0.18), transparent 40%),
+    linear-gradient(180deg, var(--bg-mid), var(--bg-deep));
+}
+
 h1 {
-  color: #dacec4;
+  color: var(--text-main);
+  font-family: "Marcellus", "Times New Roman", serif;
+  text-transform: uppercase;
 }

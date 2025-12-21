@@ -1,5 +1,25 @@
-<div>
-  <small>{{ sound.title }}</small><br>
-  <audio #audio controls [src]="sound.fileUrl" loop="loop" crossorigin="anonymous"></audio>
-</div>
+<div class="sound-card" [class.is-playing]="isPlaying">
+  <div class="sound-art">
+    <span class="sound-icon" aria-hidden="true">{{ sound.icon }}</span>
+  </div>
 
+  <div class="sound-title">{{ sound.title }}</div>
+
+  <div class="sound-controls">
+    <button type="button" class="mini-play" (click)="togglePlay()" [attr.aria-pressed]="isPlaying">
+      <span class="mini-icon" [class.is-playing]="isPlaying"></span>
+    </button>
+    <input
+      class="volume"
+      type="range"
+      min="0"
+      max="1"
+      step="0.01"
+      [value]="volume"
+      (input)="onVolumeChange($event)"
+      aria-label="Громкость"
+    >
+  </div>
+
+  <audio #audio [src]="sound.fileUrl" loop="loop" preload="metadata" crossorigin="anonymous"></audio>
+</div>
