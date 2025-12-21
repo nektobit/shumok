@@ -1,4 +1,12 @@
-<div class="sound-card" [class.is-playing]="isPlaying">
+<div
+  class="sound-card"
+  [class.is-playing]="isPlaying"
+  (click)="onCardClick($event)"
+  (keydown)="onCardKeydown($event)"
+  tabindex="0"
+  role="button"
+  [attr.aria-pressed]="isPlaying"
+>
   <div class="sound-art">
     <span class="sound-icon" aria-hidden="true">{{ sound.icon }}</span>
   </div>
@@ -6,7 +14,12 @@
   <div class="sound-title">{{ sound.title }}</div>
 
   <div class="sound-controls">
-    <button type="button" class="mini-play" (click)="togglePlay()" [attr.aria-pressed]="isPlaying">
+    <button
+      type="button"
+      class="mini-play"
+      (click)="onToggleClick($event)"
+      [attr.aria-pressed]="isPlaying"
+    >
       <span class="mini-icon" [class.is-playing]="isPlaying"></span>
     </button>
     <input
@@ -16,6 +29,7 @@
       max="1"
       step="0.01"
       [value]="volume"
+      (click)="onVolumeClick($event)"
       (input)="onVolumeChange($event)"
       aria-label="Громкость"
     >
