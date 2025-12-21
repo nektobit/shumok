@@ -2,9 +2,11 @@
   <h1>Шумок</h1>
   <app-play-btn [isPlaying]="audioService.isAnyPlaying()" (click)="togglePlay()"></app-play-btn>
 
+  <!-- Редактирование палитры звуков (временно скрыто)
   <div style="margin-top: 2rem">
     <app-edit-pallet-modal></app-edit-pallet-modal>
   </div>
+  -->
 
   <div class="sounds-wrapper">
     <div>
@@ -14,7 +16,6 @@
     </div>
   </div>
 </div>
-
 
 
 
