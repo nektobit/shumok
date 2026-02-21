@@ -6,6 +6,10 @@
   background: linear-gradient(160deg, rgba(35, 38, 46, 0.95), rgba(20, 22, 28, 0.95));
   border-radius: 22px;
   padding: 14px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -68,6 +72,8 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
+  width: 100%;
 }
 
 .mini-play {
@@ -125,7 +131,10 @@
 }
 
 .volume {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
   appearance: none;
   height: 6px;
   border-radius: 999px;
@@ -156,3 +165,36 @@
 audio {
   display: none;
 }
+
+@media (max-width: 720px) {
+  .sound-card {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .sound-art {
+    height: 110px;
+  }
+
+  .sound-controls {
+    gap: 8px;
+  }
+
+  .mini-play {
+    width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+  }
+
+  .mini-icon {
+    border-left-width: 9px;
+    border-top-width: 6px;
+    border-bottom-width: 6px;
+  }
+
+  .volume {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
