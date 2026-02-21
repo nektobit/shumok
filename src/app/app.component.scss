@@ -24,6 +24,18 @@
   gap: 22px;
 }
 
+@media (max-width: 720px) {
+  .layout {
+    padding: 36px 10px 64px;
+    gap: 22px;
+    overflow-x: clip;
+  }
+
+  .sounds-wrapper > div {
+    gap: 12px;
+  }
+}
+
 @media (min-width: 768px) {
   .sounds-wrapper > div {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -35,4 +47,3 @@
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
 }
-
